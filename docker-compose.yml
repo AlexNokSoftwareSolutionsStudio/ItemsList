@@ -19,6 +19,8 @@ services:
       - db
     ports:
       - "${BACKEND_PORT}:8000"
+    volumes:
+      - ./backend:/app
 
   frontend:
     build: ./frontend
@@ -26,5 +28,9 @@ services:
       - backend
     ports:
       - "${FRONTEND_PORT}:5173"      
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: npm run dev -- --host  
 volumes:
   db_data:
